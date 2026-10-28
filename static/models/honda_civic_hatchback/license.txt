@@ -1,0 +1,11 @@
+Model Information:
+* title:	Honda Civic Hatchback
+* source:	https://sketchfab.com/3d-models/honda-civic-hatchback-15ae9464a58a4e4a8245b4c39f103ece
+* author:	Nieve5677 (https://sketchfab.com/niev)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Honda Civic Hatchback" (https://sketchfab.com/3d-models/honda-civic-hatchback-15ae9464a58a4e4a8245b4c39f103ece) by Nieve5677 (https://sketchfab.com/niev) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

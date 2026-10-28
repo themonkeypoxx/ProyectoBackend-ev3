@@ -1,0 +1,106 @@
+{% load static %}
+<div id="nav-drawer" class="fixed inset-0 z-50 flex justify-end hidden fade-in-modal text-zinc-900">
+  <!-- Fondo desenfocado suave -->
+  <div class="close-modal-trigger absolute inset-0 bg-black/30 backdrop-blur-sm cursor-pointer"></div>
+
+  <!-- Contenedor del menú en blanco galería -->
+  <div class="relative w-full max-w-md h-full bg-white/95 backdrop-blur-2xl border-l border-black/[0.08] flex flex-col z-10 overflow-hidden text-zinc-900 shadow-2xl">
+    <!-- Barra superior -->
+    <div class="flex items-center justify-between px-7 py-6 border-b border-black/[0.06] bg-zinc-50/80">
+      <div class="flex flex-col">
+        <span class="text-[11px] tracking-[0.35em] font-medium text-black uppercase">
+          PORSCHE
+        </span>
+        <span class="text-[8.5px] font-mono tracking-[0.25em] text-zinc-500 uppercase">
+          DIRECTORIO · EDITORIAL
+        </span>
+      </div>
+
+      <button type="button" class="close-modal-trigger p-1.5 text-zinc-500 hover:text-black transition-colors focus:outline-none" aria-label="Cerrar">
+        <svg class="w-4 h-4 stroke-[1.3]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Enlaces del directorio -->
+    <div class="flex-1 overflow-y-auto px-7 py-7 space-y-7 no-scrollbar font-sans">
+      <!-- Sección 1 -->
+      <div class="space-y-3">
+        <span class="text-[9px] font-mono tracking-[0.3em] uppercase text-zinc-400 block">
+          01 · GAMA Y CONFIGURACIÓN 3D
+        </span>
+        <ul class="space-y-2.5">
+          <li>
+            <button type="button" class="open-models-trigger group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-800 hover:text-black transition-colors focus:outline-none">
+              <span>Modelos y Salón 3D</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">→</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="open-config-trigger group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-800 hover:text-black transition-colors focus:outline-none">
+              <span>Porsche Exclusive Manufaktur</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">→</span>
+            </button>
+          </li>
+          <li>
+            <a href="/admin/" target="_blank" class="group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-600 hover:text-black transition-colors">
+              <span>Panel de Control (Django)</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sección 2 -->
+      <div class="space-y-3">
+        <span class="text-[9px] font-mono tracking-[0.3em] uppercase text-zinc-400 block">
+          02 · MOTORSPORT Y PATRIMONIO
+        </span>
+        <ul class="space-y-2.5">
+          <li>
+            <a href="javascript:void(0)" class="group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-800 hover:text-black transition-colors">
+              <span>Porsche Motorsport Flacht</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-800 hover:text-black transition-colors">
+              <span>Museo Porsche Stuttgart</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sección 3 -->
+      <div class="space-y-3">
+        <span class="text-[9px] font-mono tracking-[0.3em] uppercase text-zinc-400 block">
+          03 · SERVICIOS Y CONTACTO
+        </span>
+        <ul class="space-y-2.5">
+          <li>
+            <a href="javascript:void(0)" class="group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-800 hover:text-black transition-colors">
+              <span>Buscador de Centros Oficiales</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="group flex items-center justify-between w-full text-left py-1 text-base font-light text-zinc-800 hover:text-black transition-colors">
+              <span>Porsche Financial Services</span>
+              <span class="text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Pie institucional -->
+    <div class="p-7 border-t border-black/[0.06] bg-zinc-50/80 space-y-1 text-xs font-mono text-zinc-500">
+      <div class="text-black font-normal">Dr. Ing. h.c. F. Porsche AG</div>
+      <div>Porscheplatz 1, 70435 Stuttgart-Zuffenhausen</div>
+      <div class="text-[9px] text-zinc-400 pt-1">Arquitectura Backend Django · Todos los derechos reservados</div>
+    </div>
+  </div>
+</div>

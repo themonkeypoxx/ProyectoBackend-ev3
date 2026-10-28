@@ -1,0 +1,41 @@
+{% load static %}
+<div id="search-modal"
+  class="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6 hidden fade-in-modal text-zinc-900">
+  <!-- Fondo desenfocado suave -->
+  <div class="close-modal-trigger absolute inset-0 bg-black/30 backdrop-blur-sm cursor-pointer"></div>
+
+  <!-- Diálogo de búsqueda en blanco galería -->
+  <div
+    class="relative w-full max-w-xl bg-white/95 backdrop-blur-2xl border border-black/[0.08] flex flex-col z-10 overflow-hidden text-zinc-900 shadow-2xl">
+    <!-- Entrada de búsqueda -->
+    <div class="flex items-center px-5 py-4 border-b border-black/[0.06] bg-zinc-50/80">
+      <svg class="w-4 h-4 text-zinc-400 mr-3 stroke-[1.3]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input id="search-input" type="text" placeholder="Buscar modelo, serie (911, Taycan), motor o potencia..."
+        class="w-full bg-transparent text-sm text-black placeholder-zinc-400 focus:outline-none font-sans"
+        autocomplete="off" />
+      <button type="button"
+        class="close-modal-trigger p-1 text-zinc-400 hover:text-black transition-colors focus:outline-none"
+        aria-label="Cerrar">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Resultados -->
+    <div id="search-results" class="max-h-[55vh] overflow-y-auto no-scrollbar">
+      <!-- Inyectado dinámicamente -->
+    </div>
+
+    <!-- Pie -->
+    <div
+      class="px-5 py-2.5 border-t border-black/[0.05] bg-zinc-50/80 flex items-center justify-between text-[9px] font-mono text-zinc-500">
+      <span>PULSE <kbd class="px-1 py-0.2 bg-black/5 text-zinc-600 rounded">ESC</kbd> PARA CERRAR</span>
+      <span>SELECCIONE CUALQUIER MODELO 3D PARA VISUALIZARLO</span>
+    </div>
+  </div>
+</div>

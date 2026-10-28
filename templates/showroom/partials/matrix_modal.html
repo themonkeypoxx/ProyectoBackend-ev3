@@ -1,0 +1,67 @@
+{% load static %}
+<div id="matrix-modal"
+  class="fixed inset-0 z-50 flex flex-col bg-[#fbfbfb] hidden fade-in-modal overflow-y-auto no-scrollbar text-zinc-900">
+  <!-- Cabecera fija en blanco galería -->
+  <div
+    class="sticky top-0 z-20 flex items-center justify-between px-7 sm:px-14 py-5 border-b border-black/[0.06] bg-white/95 backdrop-blur-md">
+    <div class="flex items-center space-x-5">
+      <span class="text-[13px] tracking-[0.4em] font-normal text-black uppercase">
+        PORSCHE
+      </span>
+      <span class="text-black/10">|</span>
+      <span class="text-[10px] font-mono tracking-[0.25em] text-zinc-500 uppercase">
+        LÍNEAS DE MODELOS 3D
+      </span>
+    </div>
+
+    <!-- Filtros de categoría -->
+    <div class="hidden sm:flex items-center space-x-6 text-[10px] font-mono tracking-[0.2em] uppercase">
+      <button type="button" data-filter="all"
+        class="matrix-filter-btn text-black font-semibold hover:text-black transition-colors focus:outline-none">
+        TODOS
+      </button>
+      <button type="button" data-filter="911"
+        class="matrix-filter-btn text-zinc-400 hover:text-black transition-colors focus:outline-none">
+        911
+      </button>
+      <button type="button" data-filter="718"
+        class="matrix-filter-btn text-zinc-400 hover:text-black transition-colors focus:outline-none">
+        718
+      </button>
+      <button type="button" data-filter="taycan"
+        class="matrix-filter-btn text-zinc-400 hover:text-black transition-colors focus:outline-none">
+        TAYCAN
+      </button>
+      <button type="button" data-filter="hypercar"
+        class="matrix-filter-btn text-zinc-400 hover:text-black transition-colors focus:outline-none">
+        HIPERDEPORTIVOS
+      </button>
+    </div>
+
+    <button type="button"
+      class="close-modal-trigger p-1.5 text-zinc-500 hover:text-black transition-colors focus:outline-none"
+      aria-label="Cerrar">
+      <svg class="w-5 h-5 stroke-[1.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Rejilla minimalista -->
+  <div class="max-w-[1720px] mx-auto w-full px-7 sm:px-14 py-10 flex-1">
+    <div class="mb-8">
+      <span class="text-[9px] font-mono tracking-[0.35em] uppercase text-zinc-500">
+        SALÓN DE DISEÑO 3D · STUTTGART
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-light tracking-wide text-black mt-1">
+        Gama de Alto Rendimiento
+      </h2>
+    </div>
+
+    <!-- Rejilla de tarjetas 3D -->
+    <div id="matrix-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Inyectado dinámicamente -->
+    </div>
+  </div>
+</div>

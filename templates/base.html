@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-[#fbfbfb]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Porsche — Salón Digital & Configurador Oficial{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+
+  <!-- Inter & Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            studio: '#fbfbfb',
+            surface: '#ffffff',
+            darkMain: '#121212',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js 3D WebGL Library & GLTF Loader -->
+  <script src="{% static 'js/three.min.js' %}"></script>
+  <script src="{% static 'js/GLTFLoader.js' %}"></script>
+  <script src="{% static 'js/OrbitControls.js' %}"></script>
+
+  <!-- Showroom Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="h-full w-full bg-[#fbfbfb] text-[#121212] overflow-hidden select-none font-sans antialiased">
+  {% csrf_token %}
+  
+  {% block content %}{% endblock %}
+
+  <!-- Web Audio & Showroom Engine Scripts -->
+  <script src="{% static 'js/audio.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

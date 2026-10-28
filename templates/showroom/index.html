@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ current_car.full_name }} | Porsche Digital Showroom & Configurator
+{% endblock %}
+
+{% block content %}
+<main class="relative w-screen h-screen overflow-hidden bg-[#050505] text-white select-none font-sans">
+  <!-- 1. Top Navigation Bar -->
+  {% include 'showroom/partials/header.html' %}
+
+  <!-- 2. Hero Pedestal Section with 3D Turntable Experience -->
+  {% include 'showroom/partials/pedestal.html' %}
+
+  <!-- 3. Strict 12-Column Floating Telemetry Data & Primary CTA -->
+  {% include 'showroom/partials/floating_specs.html' %}
+
+  <!-- 4. Bottom Horizontal Model Selector Carousel -->
+  {% include 'showroom/partials/carousel.html' %}
+
+  <!-- 5. Interactive Overlays & Modals -->
+  {% include 'showroom/partials/configurator_drawer.html' %}
+  {% include 'showroom/partials/specs_modal.html' %}
+  {% include 'showroom/partials/matrix_modal.html' %}
+  {% include 'showroom/partials/search_modal.html' %}
+  {% include 'showroom/partials/nav_drawer.html' %}
+</main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  // Hydrate Django ORM models and packages data into client-side engine
+  window.CARS_DATA = {{ cars_json|safe }};
+  window.PACKAGES_DATA = {{ packages_json|safe }};
+  window.ACTIVE_INDEX = {{ active_index }};
+</script>
+<script src="{% static 'js/showroom.js' %}"></script>
+{% endblock %}
+

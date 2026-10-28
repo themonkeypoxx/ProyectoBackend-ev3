@@ -1,0 +1,195 @@
+{% load static %}
+<div id="configurator-drawer" class="fixed inset-0 z-50 flex justify-end hidden fade-in-modal">
+  <!-- Fondo con desenfoque suave -->
+  <div class="close-modal-trigger absolute inset-0 bg-black/30 backdrop-blur-sm transition-opacity cursor-pointer">
+  </div>
+
+  <!-- Panel lateral minimalista en blanco galería -->
+  <div
+    class="relative w-full max-w-xl h-full bg-white/95 backdrop-blur-2xl border-l border-black/[0.08] shadow-2xl flex flex-col z-10 overflow-hidden text-zinc-900">
+    <!-- Cabecera -->
+    <div class="flex items-center justify-between px-7 py-6 border-b border-black/[0.06] bg-zinc-50/80">
+      <div>
+        <span class="text-[9px] font-mono tracking-[0.35em] uppercase text-zinc-500">
+          CONFIGURACIÓN OFICIAL 3D
+        </span>
+        <h2 id="config-car-name" class="text-lg sm:text-xl font-medium tracking-wider text-black uppercase mt-0.5">
+          {{ current_car.full_name }}
+        </h2>
+        <p id="config-car-tagline" class="text-xs text-zinc-500 font-light mt-0.5 line-clamp-1">
+          {{ current_car.tagline }}
+        </p>
+      </div>
+
+      <button type="button"
+        class="close-modal-trigger p-1.5 text-zinc-500 hover:text-black transition-colors focus:outline-none"
+        aria-label="Cerrar">
+        <svg class="w-4 h-4 stroke-[1.3]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Pestañas minimalistas -->
+    <div
+      class="flex items-center px-7 border-b border-black/[0.06] bg-white text-[10px] font-mono tracking-[0.2em] uppercase overflow-x-auto no-scrollbar space-x-6">
+      <button type="button" data-tab="paint"
+        class="config-tab-btn py-3.5 text-black border-b border-black focus:outline-none whitespace-nowrap">
+        Pintura 3D
+      </button>
+      <button type="button" data-tab="wheels"
+        class="config-tab-btn py-3.5 text-zinc-500 hover:text-black focus:outline-none whitespace-nowrap">
+        Llantas
+      </button>
+      <button type="button" data-tab="packages"
+        class="config-tab-btn py-3.5 text-zinc-500 hover:text-black focus:outline-none whitespace-nowrap">
+        Equipamiento
+      </button>
+      <button type="button" data-tab="summary"
+        class="config-tab-btn py-3.5 text-zinc-500 hover:text-black focus:outline-none whitespace-nowrap">
+        Resumen & Contacto
+      </button>
+    </div>
+
+    <!-- Contenido scrollable -->
+    <div class="flex-1 overflow-y-auto p-7 space-y-5 no-scrollbar">
+      <!-- 1. Color Exterior -->
+      <div id="config-tab-paint" class="config-tab-content space-y-3">
+        <div class="text-[10px] font-mono text-zinc-500 tracking-widest uppercase">
+          Colores de Fábrica Porsche
+        </div>
+        <div id="config-paint-list" class="space-y-2">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </div>
+
+      <!-- 2. Llantas -->
+      <div id="config-tab-wheels" class="config-tab-content space-y-3 hidden">
+        <div class="text-[10px] font-mono text-zinc-500 tracking-widest uppercase">
+          Llantas Forjadas de Competición
+        </div>
+        <div id="config-wheel-list" class="space-y-2">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </div>
+
+      <!-- 3. Paquetes y Opciones -->
+      <div id="config-tab-packages" class="config-tab-content space-y-3 hidden">
+        <div class="text-[10px] font-mono text-zinc-500 tracking-widest uppercase">
+          Paquetes de Rendimiento y Circuito
+        </div>
+        <div id="config-package-list" class="space-y-2">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </div>
+
+      <!-- 4. Resumen y Formulario de Contacto -->
+      <div id="config-tab-summary" class="config-tab-content space-y-5 hidden">
+        <!-- Vista previa de vehículo -->
+        <div class="p-4 bg-zinc-50 border border-black/[0.06] flex items-center space-x-4 rounded-[1px]">
+          <img id="summary-car-image" src="{{ current_car.hero_image }}" alt="Porsche"
+            class="w-24 h-14 object-contain bg-white rounded-[1px] p-1 border border-black/[0.05]" />
+          <div>
+            <h4 id="summary-model-name" class="text-sm font-medium text-black uppercase tracking-wider">{{
+              current_car.full_name }}</h4>
+            <div id="summary-color-name" class="text-[11px] text-zinc-600 font-mono mt-0.5">Color</div>
+            <div id="summary-wheel-name" class="text-[11px] text-zinc-600 font-mono mt-0.5">Llantas</div>
+          </div>
+        </div>
+
+        <!-- Alerta de éxito -->
+        <div id="inquiry-success-alert" class="p-5 bg-emerald-50 border border-emerald-500/30 space-y-2.5 hidden">
+          <div
+            class="flex items-center space-x-2 text-emerald-800 text-xs font-mono uppercase tracking-widest font-semibold">
+            <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>SOLICITUD REGISTRADA</span>
+          </div>
+          <p class="text-xs text-zinc-700 leading-relaxed font-light">
+            Su configuración 3D ha quedado registrada oficialmente. Su código de referencia Porsche es:
+          </p>
+          <div id="reservation-code-display"
+            class="px-3 py-1.5 bg-white border border-emerald-500/30 font-mono text-xs text-emerald-900 text-center tracking-widest font-bold">
+            PRSH-2026-00001
+          </div>
+          <p class="text-[10px] text-zinc-500 font-mono">
+            Un especialista de Porsche Centre se pondrá en contacto a la brevedad.
+          </p>
+        </div>
+
+        <!-- Formulario minimalista blanco -->
+        <form id="inquiry-form" class="space-y-3.5">
+          <div class="text-[10px] font-mono text-zinc-500 tracking-widest uppercase">
+            Datos de Contacto para Reserva
+          </div>
+
+          <div>
+            <label class="block text-[9.5px] font-mono uppercase text-zinc-600 mb-1">Nombre Completo</label>
+            <input id="inquiry-name" type="text" required placeholder="Ferdinand Porsche"
+              class="w-full px-3 py-2 bg-white border border-black/[0.1] text-xs text-black focus:border-black transition-colors" />
+          </div>
+
+          <div>
+            <label class="block text-[9.5px] font-mono uppercase text-zinc-600 mb-1">Correo Electrónico</label>
+            <input id="inquiry-email" type="email" required placeholder="cliente@porsche.es"
+              class="w-full px-3 py-2 bg-white border border-black/[0.1] text-xs text-black focus:border-black transition-colors" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[9.5px] font-mono uppercase text-zinc-600 mb-1">Teléfono</label>
+              <input id="inquiry-phone" type="tel" placeholder="+34 600 000 000"
+                class="w-full px-3 py-2 bg-white border border-black/[0.1] text-xs text-black focus:border-black transition-colors" />
+            </div>
+            <div>
+              <label class="block text-[9.5px] font-mono uppercase text-zinc-600 mb-1">Centro Porsche</label>
+              <select id="inquiry-dealer"
+                class="w-full px-3 py-2 bg-white border border-black/[0.1] text-xs text-black focus:border-black transition-colors">
+                <option value="Porsche Centre Stuttgart">Centro Porsche Stuttgart</option>
+                <option value="Porsche Centre Madrid">Centro Porsche Madrid Norte</option>
+                <option value="Porsche Centre Barcelona">Centro Porsche Barcelona</option>
+                <option value="Porsche Centre Buenos Aires">Centro Porsche Buenos Aires</option>
+                <option value="Porsche Centre Ciudad de México">Centro Porsche Santa Fe</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="btn-submit-inquiry" type="submit"
+            class="w-full py-3 px-5 bg-black hover:bg-zinc-800 text-white text-[11px] font-mono tracking-[0.25em] uppercase font-medium flex items-center justify-center space-x-2 transition-all mt-3 shadow-sm">
+            <span>SOLICITAR CONTACTO OFICIAL</span>
+            <svg class="w-3.5 h-3.5 stroke-[1.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Barra inferior de desglose económico -->
+    <div class="p-6 border-t border-black/[0.06] bg-zinc-50/90 space-y-2.5">
+      <div class="grid grid-cols-4 gap-2 text-[9.5px] font-mono text-zinc-600 border-b border-black/[0.05] pb-2.5">
+        <div>Base: <span id="config-base-price" class="text-black font-medium">$0</span></div>
+        <div>Pintura: <span id="config-color-price" class="text-black font-medium">$0</span></div>
+        <div>Llantas: <span id="config-wheel-price" class="text-black font-medium">$0</span></div>
+        <div>Opciones: <span id="config-pkg-price" class="text-black font-medium">$0</span></div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-[8.5px] font-mono tracking-widest uppercase text-zinc-500 block">PRECIO TOTAL
+            ESTIMADO</span>
+          <span id="config-total-price" class="text-xl font-light font-mono text-black tracking-tight">$0</span>
+        </div>
+
+        <div class="text-right">
+          <span class="text-[8.5px] font-mono tracking-widest uppercase text-zinc-500 block">LEASING ORIENTATIVO</span>
+          <span id="config-monthly-lease" class="text-xs font-mono text-zinc-700 font-medium">$0/mes</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

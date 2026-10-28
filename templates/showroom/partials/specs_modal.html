@@ -1,0 +1,128 @@
+{% load static %}
+<div id="specs-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 hidden fade-in-modal">
+  <!-- Fondo desenfocado suave -->
+  <div class="close-modal-trigger absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer"></div>
+
+  <!-- Diálogo modal en blanco galería -->
+  <div
+    class="relative w-full max-w-3xl max-h-[88vh] bg-white/95 backdrop-blur-2xl border border-black/[0.08] shadow-2xl flex flex-col z-10 overflow-hidden text-zinc-900">
+    <!-- Cabecera -->
+    <div class="flex items-center justify-between px-7 py-5 border-b border-black/[0.06] bg-zinc-50/80">
+      <div>
+        <span class="text-[9px] font-mono tracking-[0.35em] uppercase text-zinc-500">
+          DOCUMENTACIÓN TÉCNICA OFICIAL
+        </span>
+        <h2 id="specs-modal-title" class="text-base sm:text-lg font-medium tracking-wider text-black uppercase mt-0.5">
+          {{ current_car.full_name }} — FICHA TÉCNICA
+        </h2>
+      </div>
+
+      <button type="button"
+        class="close-modal-trigger p-1.5 text-zinc-500 hover:text-black transition-colors focus:outline-none"
+        aria-label="Cerrar">
+        <svg class="w-4 h-4 stroke-[1.3]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Contenido -->
+    <div class="flex-1 overflow-y-auto p-7 space-y-7 no-scrollbar text-zinc-900">
+      <!-- 4 Cifras Clave -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-zinc-50 border border-black/[0.05]">
+        <div>
+          <div class="text-[8.5px] font-mono tracking-widest text-zinc-500 uppercase">0–100 KM/H</div>
+          <div id="modal-spec-accel" class="text-xl font-light text-black font-mono mt-0.5">{{
+            current_car.specs.acceleration }}</div>
+        </div>
+        <div>
+          <div class="text-[8.5px] font-mono tracking-widest text-zinc-500 uppercase">VELOCIDAD MÁXIMA</div>
+          <div id="modal-spec-speed" class="text-xl font-light text-black font-mono mt-0.5">{{
+            current_car.specs.top_speed }}</div>
+        </div>
+        <div>
+          <div class="text-[8.5px] font-mono tracking-widest text-zinc-500 uppercase">POTENCIA MÁXIMA</div>
+          <div id="modal-spec-power" class="text-xl font-light text-black font-mono mt-0.5">{{
+            current_car.specs.power_hp }}</div>
+        </div>
+        <div>
+          <div class="text-[8.5px] font-mono tracking-widest text-zinc-500 uppercase">PAR MOTOR</div>
+          <div id="modal-spec-torque" class="text-xl font-light text-black font-mono mt-0.5">{{ current_car.specs.torque
+            }}</div>
+        </div>
+      </div>
+
+      <!-- Tablas técnicas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs">
+        <!-- Motor y Transmisión -->
+        <div class="space-y-3">
+          <h3
+            class="text-[10px] font-mono tracking-[0.25em] uppercase text-zinc-700 pb-1.5 border-b border-black/[0.08]">
+            01 · PROPULSIÓN Y TRANSMISIÓN
+          </h3>
+          <dl class="space-y-2">
+            <div class="flex justify-between py-1 border-b border-black/[0.04]">
+              <dt class="text-zinc-500">Motor:</dt>
+              <dd id="modal-spec-engine" class="font-mono text-black text-right text-[11px] font-medium">{{
+                current_car.specs.engine }}</dd>
+            </div>
+            <div class="flex justify-between py-1 border-b border-black/[0.04]">
+              <dt class="text-zinc-500">Transmisión:</dt>
+              <dd id="modal-spec-trans" class="font-mono text-black text-right text-[11px] font-medium">{{
+                current_car.specs.transmission }}</dd>
+            </div>
+            <div class="flex justify-between py-1 border-b border-black/[0.04]">
+              <dt class="text-zinc-500">Tracción:</dt>
+              <dd id="modal-spec-drivetrain" class="font-mono text-black text-right text-[11px] font-medium">{{
+                current_car.specs.drivetrain }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Chasis y Peso -->
+        <div class="space-y-3">
+          <h3
+            class="text-[10px] font-mono tracking-[0.25em] uppercase text-zinc-700 pb-1.5 border-b border-black/[0.08]">
+            02 · CHASIS Y DIMENSIONES
+          </h3>
+          <dl class="space-y-2">
+            <div class="flex justify-between py-1 border-b border-black/[0.04]">
+              <dt class="text-zinc-500">Peso en vacío (DIN):</dt>
+              <dd id="modal-spec-weight" class="font-mono text-black text-right text-[11px] font-medium">{{
+                current_car.specs.weight }}</dd>
+            </div>
+            <div class="flex justify-between py-1 border-b border-black/[0.04]">
+              <dt class="text-zinc-500">Norma ambiental:</dt>
+              <dd class="font-mono text-black text-right text-[11px] font-medium">Euro 6d-ISC-FCM</dd>
+            </div>
+            <div class="flex justify-between py-1 border-b border-black/[0.04]">
+              <dt class="text-zinc-500">Origen:</dt>
+              <dd class="font-mono text-black text-right text-[11px] font-medium">Stuttgart-Zuffenhausen</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Filosofía de ingeniería -->
+      <div class="p-5 bg-zinc-50 border border-black/[0.06] space-y-1.5">
+        <span class="text-[8.5px] font-mono tracking-[0.3em] uppercase text-zinc-500 block">FILOSOFÍA DE
+          DESARROLLO</span>
+        <p id="modal-spec-desc" class="text-xs text-zinc-600 font-light leading-relaxed">
+          {{ current_car.description }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Pie -->
+    <div class="px-7 py-4 border-t border-black/[0.06] bg-zinc-50/80 flex items-center justify-between">
+      <span class="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
+        HOMOLOGACIÓN OFICIAL DR. ING. H.C. F. PORSCHE AG
+      </span>
+      <button type="button"
+        class="open-config-trigger px-4 py-2 bg-black text-white font-mono text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-colors">
+        CONFIGURAR MODELO 3D →
+      </button>
+    </div>
+  </div>
+</div>
