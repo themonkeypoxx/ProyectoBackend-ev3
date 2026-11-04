@@ -1,26 +1,24 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from datetime import datetime
+from django.utils import timezone
 from django.utils.text import slugify
-#esto solo es para que el programa sepa siempre que año es, no se si sea una buena implementación
-# - Ismael !!! 
-ahora = datetime.now()
-anho_actual = datetime.year
-#será necesario ponerles verbose name a todos?
+
+
+def anho_actual():
+    return timezone.now().year
+
+
 class Auto(models.Model):
     marca = models.CharField(max_length=20)
     modelo = models.CharField(max_length=20)
     patente = models.CharField(max_length=20, unique=True)
     color = models.CharField(max_length=20)
-    # el DateField de Django no tiene para sacar el año actual por su cuenta, x eso hice esto - I !!!!
-    anho = models.IntegerField(verbose_name="Año de fabricación",validators=[MinValueValidator(1920),      
-            MaxValueValidator(anho_actual) 
-        ],
-        default=anho_actual
+    anho = models.IntegerField(
+        verbose_name="Año de fabricación",
+        validators=[MinValueValidator(1920), MaxValueValidator(anho_actual)],
+        default=anho_actual,
     )
     precio_hora = models.FloatField()
-    #pal slug panchito, tu q le sabes. Copiaré y adaptaré el código del profe debajo de la class meta
-    slug = models.SlugField(max_length=220, unique=True, blank=True)
 
     class Meta():
         verbose_name_plural = "Automóviles"
