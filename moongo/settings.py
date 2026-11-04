@@ -138,3 +138,7 @@ MAILERS = {
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+##aca se define el user q hice !!!! -Ismael
+## Espero funcione praying bradar 
+AUTH_USER_MODEL = "usuarios.User"

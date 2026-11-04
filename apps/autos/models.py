@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-import datetime
+from datetime import datetime
 from django.utils.text import slugify
 #esto solo es para que el programa sepa siempre que año es, no se si sea una buena implementación
 # - Ismael !!! 
@@ -32,11 +32,10 @@ class Auto(models.Model):
     @property 
     def precio_formateado(self):
         return f"${self.precio_hora}CLP por hora de arriendo"
-
     #esto genera la URL amigable. es el método save por defecto del Django pero le sobreescribe algunas cosas
     # x ejemplo (leer comentarios a lo largo del método) - I !!!! 
     def save(self, *args, **kwargs):
-        #acá lo que hace es verificar q el objeto no tenga un slug
+        #acá lo que hace es verificar q el objeto no tenga un slug ya creado
         if not self.slug:
             base_slug = slugify(self.nombre)
             slug = base_slug
