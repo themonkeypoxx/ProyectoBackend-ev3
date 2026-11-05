@@ -142,3 +142,5 @@ MESSAGE_TAGS = {
 ##aca se define el user q hice !!!! -Ismael
 ## Espero funcione praying bradar 
 AUTH_USER_MODEL = "usuarios.User"
+
+

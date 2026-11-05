@@ -19,6 +19,7 @@ class Auto(models.Model):
         default=anho_actual,
     )
     precio_hora = models.FloatField()
+    slug = models.SlugField(max_length=80, unique=True, blank=True, editable=False)
 
     class Meta():
         verbose_name_plural = "Automóviles"
@@ -27,15 +28,17 @@ class Auto(models.Model):
     def __str__(self):
         return f"{self.marca}  {self.modelo} ({self.anho})"
 
-    @property 
+    @property
     def precio_formateado(self):
-        return f"${self.precio_hora}CLP por hora de arriendo"
+        return f"${self.precio_hora:,.0f} CLP por hora de arriendo"
+
     #esto genera la URL amigable. es el método save por defecto del Django pero le sobreescribe algunas cosas
-    # x ejemplo (leer comentarios a lo largo del método) - I !!!! 
+    # x ejemplo (leer comentarios a lo largo del método) - Ismael !!!!
     def save(self, *args, **kwargs):
         #acá lo que hace es verificar q el objeto no tenga un slug ya creado
         if not self.slug:
-            base_slug = slugify(self.nombre)
+            # antes decía self.nombre, que no existe; ahora se usa marca + modelo
+            base_slug = slugify(f"{self.marca} {self.modelo}")
             slug = base_slug
             #aca define un contador y si existe uno cn el mismo nombre (que no debiera suceder por el unique en el campo de slug)
             #le añade un numero, x ejemplo toyota-corolla y toyota-corolla-1
