@@ -5,10 +5,10 @@ from .models import Auto
 class AutoForm(forms.ModelForm):
     class Meta:
         model = Auto
-        fields = ['marca', 'modelo', 'patente', 'color', 'anho', 'precio_hora']
+        fields = ['marca', 'modelo', 'patente', 'color', 'anho', 'precio_dia']
         labels = {
             'anho': 'Año de fabricación',
-            'precio_hora': 'Precio por hora (CLP)',
+            'precio_dia': 'Precio por día (CLP)',
         }
 
 

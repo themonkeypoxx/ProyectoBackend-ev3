@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.autos',
     'apps.reservas', #esto es para los arriendos enrealidad, pero se entiende
+    'apps.home',
 
 ]
 
@@ -142,5 +143,8 @@ MESSAGE_TAGS = {
 ##aca se define el user q hice !!!! -Ismael
 ## Espero funcione praying bradar 
 AUTH_USER_MODEL = "usuarios.User"
+
+LOGIN_REDIRECT_URL = '/autos/'#url a la q se va el cerote q inicie sesión
+LOGOUT_REDIRECT_URL = '/login/'#url a la q se va el cerote q cierre sesión
 
 

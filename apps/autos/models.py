@@ -18,7 +18,7 @@ class Auto(models.Model):
         validators=[MinValueValidator(1920), MaxValueValidator(anho_actual)],
         default=anho_actual,
     )
-    precio_hora = models.FloatField()
+    precio_dia = models.IntegerField(verbose_name= "Precio por día", validators=[MinValueValidator(13000)], default=13000)
     slug = models.SlugField(max_length=80, unique=True, blank=True, editable=False)
 
     class Meta():
@@ -30,7 +30,7 @@ class Auto(models.Model):
 
     @property
     def precio_formateado(self):
-        return f"${self.precio_hora:,.0f} CLP por hora de arriendo"
+        return f"${self.precio_hora:,.0f} CLP por dia de arriendo"
 
     #esto genera la URL amigable. es el método save por defecto del Django pero le sobreescribe algunas cosas
     # x ejemplo (leer comentarios a lo largo del método) - Ismael !!!!
