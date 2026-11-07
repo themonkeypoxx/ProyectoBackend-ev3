@@ -1,89 +1,167 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Moon-Go{% endblock %}</title>
+    <title>{% block title %}Moon-Go | Arriendo de Autos{% endblock %}</title>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Bootstrap 5.3 CSS & Icons -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Estilos Personalizados Avis / Moon-Go (Cargados después de Bootstrap para tener prioridad) -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
 
-    <!-- Barra de Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm py-3">
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Barra de Navegación Estilo Avis -->
+    <nav class="navbar navbar-expand-lg avis-navbar sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-semibold" href="{% url 'home:home' %}">
+            <a class="navbar-brand" href="{% url 'autos:lista' %}">
                 <i class="bi bi-car-front-fill"></i> Moon-Go
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menu">
+                <i class="bi bi-list fs-2 text-white"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto ps-lg-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'autos:lista' %}">Autos disponibles</a>
+                        <a class="nav-link" href="{% url 'autos:lista' %}">
+                            <i class="bi bi-grid-fill me-1"></i> Flota de Autos
+                        </a>
                     </li>
 
-                    {% if user.is_staff %}
+                    {% if user.is_authenticated and not user.is_staff and not user.is_superuser %}
+                    {% if reservas_activas %}
+                    <li class="nav-item">
+                        <span class="nav-link text-warning">
+                            <i class="bi bi-clock-history me-1"></i> Reservas activas: <strong>{{ reservas_activas
+                                }}</strong>
+                        </span>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+
+                    {% if user.is_staff or user.is_superuser %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-info" href="#" data-bs-toggle="dropdown">Administración</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'autos:gestion' %}">Gestionar autos</a></li>
-                            <li><a class="dropdown-item" href="{% url 'autos:crear' %}">Agregar auto</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Panel de Django</a></li>
+                        <a class="nav-link dropdown-toggle text-warning fw-semibold" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear-fill me-1"></i> Administración
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="{% url 'autos:gestion' %}"><i
+                                        class="bi bi-kanban me-2"></i>Gestionar flota</a></li>
+                            <li><a class="dropdown-item" href="{% url 'autos:crear' %}"><i
+                                        class="bi bi-plus-circle me-2"></i>Publicar nuevo auto</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank"><i
+                                        class="bi bi-shield-lock me-2"></i>Panel Django Admin</a></li>
                         </ul>
                     </li>
                     {% endif %}
                 </ul>
 
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-2">
                     {% if user.is_authenticated %}
-                        <span class="text-white small">{{ user.username }}</span>
-                        <form method="post" action="{% url 'logout' %}" class="m-0">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Salir</button>
-                        </form>
+                    <div class="avis-user-badge d-flex align-items-center gap-2">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="fw-semibold">{{ user.username }}</span>
+                    </div>
+                    <form method="post" action="{% url 'logout' %}" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-light btn-sm px-3">
+                            <i class="bi bi-box-arrow-right me-1"></i> Salir
+                        </button>
+                    </form>
                     {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm">Ingresar</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm px-3">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar
+                    </a>
+                    <a href="{% url 'registro' %}" class="btn btn-avis btn-sm px-3">
+                        Registrarse
+                    </a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Mensajes flash de Django -->
+    <!-- Mensajes Flash de Django -->
+    {% if messages %}
     <div class="container mt-3">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm border-0" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
     </div>
+    {% endif %}
 
-    <!-- Contenido principal -->
-    <main class="container my-4 flex-grow-1">
+    <!-- Contenido Principal -->
+    <main class="flex-grow-1">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Pie de página -->
-    <footer class="bg-dark text-white py-4 mt-auto">
-        <div class="container text-center">
-            <small>&copy; 2026 Moon-Go - Santiago , Chile.</small>
-            <br>
-            <small> Ismael Figueroa, Francisco Miranda </small>
+    <!-- Pie de Página Estilo Avis -->
+    <footer class="avis-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white fw-bold mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-car-front-fill text-danger"></i> MOON-GO
+                    </h5>
+                    <p class="small text-secondary">
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6>Vehículos</h6>
+                    <ul>
+                        <li><a href="{% url 'autos:lista' %}">Flota Completa</a></li>
+                        <li><a href="{% url 'autos:lista' %}?orden=precio_asc">Económicos</a></li>
+                        <li><a href="{% url 'autos:lista' %}?orden=anho_desc">Últimos Modelos</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6>Servicios</h6>
+                    <ul>
+                        <li><a href="#">Arriendo por Día</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6>Contacto y Soporte</h6>
+                    <p class="small text-secondary mb-2">
+                        <i class="bi bi-geo-alt-fill text-danger me-2"></i> Chillan & Regiones, Chile
+                    </p>
+                    <p class="small text-secondary">
+                        <i class="bi bi-envelope-fill text-danger me-2"></i> contacto@moongo.cl
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="avis-footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <div>
+                    &copy; 2026 Moon-Go
+                </div>
+                <div class="text-muted small">
+                    Desarrollado por Ismael Figueroa & Francisco Miranda
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {% block scripts %}{% endblock %}
 </body>
+
 </html>

@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.autos',
     'apps.reservas', #esto es para los arriendos enrealidad, pero se entiende
-    'apps.home',
-
 ]
 
 MIDDLEWARE = [

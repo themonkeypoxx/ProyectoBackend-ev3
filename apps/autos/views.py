@@ -29,8 +29,8 @@ def auto_lista(request):
         )
 
     ordenes_validos = {
-        'precio_asc': 'precio_hora',
-        'precio_desc': '-precio_hora',
+        'precio_asc': 'precio_dia',
+        'precio_desc': '-precio_dia',
         'modelo_asc': 'modelo',
         'anho_desc': '-anho',
     }
@@ -72,7 +72,7 @@ def gestion_autos(request):
 @user_passes_test(es_administrador, login_url='autos:lista')
 def auto_crear(request):
     if request.method == 'POST':
-        form = AutoForm(request.POST)
+        form = AutoForm(request.POST, request.FILES)
         if form.is_valid():
             auto = form.save()
             messages.success(request, f"¡Auto '{auto}' creado exitosamente!")
@@ -91,7 +91,7 @@ def auto_crear(request):
 def auto_editar(request, id):
     auto = get_object_or_404(Auto, id=id)
     if request.method == 'POST':
-        form = AutoForm(request.POST, instance=auto)
+        form = AutoForm(request.POST, request.FILES, instance=auto)
         if form.is_valid():
             form.save()
             messages.success(request, f"Auto '{auto}' actualizado.")
