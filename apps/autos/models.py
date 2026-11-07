@@ -20,6 +20,7 @@ class Auto(models.Model):
     )
     precio_dia = models.IntegerField(verbose_name= "Precio por día", validators=[MinValueValidator(13000)], default=13000)
     slug = models.SlugField(max_length=80, unique=True, blank=True, editable=False)
+    imagen = models.ImageField( verbose_name="Imagen",upload_to="autos/", blank=True, null=True,)
 
     class Meta():
         verbose_name_plural = "Automóviles"
@@ -30,7 +31,7 @@ class Auto(models.Model):
 
     @property
     def precio_formateado(self):
-        return f"${self.precio_hora:,.0f} CLP por dia de arriendo"
+        return f"${self.precio_dia:,.0f} CLP por dia de arriendo"
 
     #esto genera la URL amigable. es el método save por defecto del Django pero le sobreescribe algunas cosas
     # x ejemplo (leer comentarios a lo largo del método) - Ismael !!!!
