@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Crear Cuenta | Moon-Go Avis{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card" style="max-width: 520px;">
+        <div class="auth-card-header">
+            <h4 class="fw-bold mb-1"><i class="bi bi-car-front-fill text-danger me-2"></i>Crear Cuenta</h4>
+            <span class="small text-secondary">Únete a Moon-Go y reserva tu vehículo en minutos</span>
+        </div>
+        <div class="auth-card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger py-2 small">
+                        {% for error in form.non_field_errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small text-secondary" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small class="form-text text-muted d-block mt-1">{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for error in field.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-avis w-100 py-2 mt-3 fw-semibold">
+                    <i class="bi bi-person-check-fill me-1"></i> Completar Registro
+                </button>
+            </form>
+
+            <div class="text-center mt-4 pt-3 border-top">
+                <span class="text-muted small">¿Ya tienes cuenta?</span>
+                <a href="{% url 'login' %}" class="fw-semibold small ms-1 text-danger">Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("form input, form select").forEach(function(el) {
+            if (el.type !== 'checkbox' && el.type !== 'radio' && el.type !== 'submit') {
+                el.classList.add("form-control");
+            }
+        });
+    });
+</script>
+{% endblock %}
+

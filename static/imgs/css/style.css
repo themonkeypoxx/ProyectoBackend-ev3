@@ -1,4 +1,2 @@
-#centrado{
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+/* Copia sincronizada en static/imgs/css/style.css */
+@import url('../../css/style.css');

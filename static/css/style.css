@@ -1,0 +1,564 @@
+/* ==========================================================================
+   MOON-GO / SISTEMA DE DISEÑO ESTILO AVIS CHILE RENT-A-CAR
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES DE TEMA Y PALETA DE COLORES
+   (Fácilmente personalizable: cambia los valores HEX aquí para alterar toda la app)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Principal (Rojo Corporativo Avis) */
+  --mg-primary: #d4002a;
+  --mg-primary-hover: #b30023;
+  --mg-primary-active: #94001c;
+  --mg-primary-subtle: #ffeaec;
+  --mg-primary-border: rgba(212, 0, 42, 0.2);
+
+  /* Neutros Oscuros */
+  --mg-dark: #121212;
+  --mg-dark-secondary: #212529;
+  --mg-header-bg: #1a1a1a;
+  --mg-card-dark: #2a2a2a;
+
+  /* Neutros Claros */
+  --mg-body-bg: #f5f6f8;
+  --mg-surface: #ffffff;
+  --mg-surface-secondary: #f8f9fa;
+  --mg-border: #e2e8f0;
+  --mg-border-subtle: #ebeef2;
+
+  /* Tipografía y Textos */
+  --mg-text-main: #1f2937;
+  --mg-text-muted: #64748b;
+  --mg-text-light: #94a3b8;
+
+  /* Estados */
+  --mg-success: #16a34a;
+  --mg-warning: #f59e0b;
+  --mg-danger: #dc2626;
+  --mg-info: #0284c7;
+
+  /* Sombras y Elevaciones */
+  --mg-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --mg-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --mg-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --mg-shadow-hover: 0 14px 28px rgba(0, 0, 0, 0.12), 0 10px 10px rgba(0, 0, 0, 0.06);
+
+  /* Bordes y Transiciones */
+  --mg-radius-sm: 6px;
+  --mg-radius-md: 10px;
+  --mg-radius-lg: 16px;
+  --mg-radius-full: 9999px;
+  --mg-transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --mg-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. REINICIO Y ESTILOS GLOBALES
+   -------------------------------------------------------------------------- */
+body {
+  font-family: var(--mg-font-family);
+  background-color: var(--mg-body-bg);
+  color: var(--mg-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--mg-primary);
+  text-decoration: none;
+  transition: var(--mg-transition);
+}
+
+a:hover {
+  color: var(--mg-primary-hover);
+}
+
+/* --------------------------------------------------------------------------
+   3. BARRA DE NAVEGACIÓN (NAVBAR ESTILO AVIS)
+   -------------------------------------------------------------------------- */
+.avis-navbar {
+  background-color: var(--mg-dark) !important;
+  border-bottom: 3px solid var(--mg-primary);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.avis-navbar .navbar-brand {
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.5px;
+  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avis-navbar .navbar-brand i {
+  color: var(--mg-primary);
+  font-size: 1.6rem;
+}
+
+.avis-navbar .nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #e2e8f0 !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: var(--mg-radius-sm);
+  transition: var(--mg-transition);
+}
+
+.avis-navbar .nav-link:hover,
+.avis-navbar .nav-link:focus {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.avis-navbar .nav-link.active {
+  color: #ffffff !important;
+  background-color: var(--mg-primary);
+}
+
+/* Badge de usuario y sesión */
+.avis-user-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--mg-radius-full);
+  font-size: 0.85rem;
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   4. BOTONES ESTILO AVIS
+   -------------------------------------------------------------------------- */
+.btn-avis {
+  background-color: var(--mg-primary);
+  color: #ffffff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mg-radius-sm);
+  padding: 0.65rem 1.4rem;
+  transition: var(--mg-transition);
+  box-shadow: 0 2px 4px rgba(212, 0, 42, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-avis:hover {
+  background-color: var(--mg-primary-hover);
+  box-shadow: 0 4px 10px rgba(212, 0, 42, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-avis:active {
+  background-color: var(--mg-primary-active);
+  transform: translateY(0);
+}
+
+.btn-avis-outline {
+  background-color: transparent;
+  color: var(--mg-primary) !important;
+  border: 2px solid var(--mg-primary);
+  font-weight: 600;
+  border-radius: var(--mg-radius-sm);
+  padding: 0.55rem 1.25rem;
+  transition: var(--mg-transition);
+}
+
+.btn-avis-outline:hover {
+  background-color: var(--mg-primary);
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.btn-avis-dark {
+  background-color: var(--mg-dark);
+  color: #ffffff !important;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mg-radius-sm);
+  padding: 0.65rem 1.4rem;
+  transition: var(--mg-transition);
+}
+
+.btn-avis-dark:hover {
+  background-color: #2b2b2b;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   5. HERO BANNER Y BARRA DE RESERVA (ESTILO AVIS.CL)
+   -------------------------------------------------------------------------- */
+.avis-hero {
+  position: relative;
+  background: linear-gradient(135deg, rgba(18, 18, 18, 0.85), rgba(40, 10, 15, 0.8)),
+    url('/static/imgs/autos-banner.jpg') center/cover no-repeat;
+  padding: 4.5rem 1.5rem 5.5rem 1.5rem;
+  border-radius: var(--mg-radius-lg);
+  color: #ffffff;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  box-shadow: var(--mg-shadow-lg);
+}
+
+.avis-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.avis-hero p {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  max-width: 650px;
+}
+
+/* Barra flotante de búsqueda y cotización rápida */
+.avis-search-box {
+  background: var(--mg-surface);
+  border-radius: var(--mg-radius-md);
+  box-shadow: var(--mg-shadow-lg);
+  padding: 1.75rem;
+  border: 1px solid var(--mg-border-subtle);
+  margin-top: -3.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.avis-search-box .form-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mg-text-muted);
+  margin-bottom: 0.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. TARJETAS DE VEHÍCULOS (FLEET CARDS)
+   -------------------------------------------------------------------------- */
+.avis-car-card {
+  background: var(--mg-surface);
+  border-radius: var(--mg-radius-md);
+  border: 1px solid var(--mg-border);
+  overflow: hidden;
+  transition: var(--mg-transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: var(--mg-shadow-sm);
+}
+
+.avis-car-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mg-shadow-hover);
+  border-color: rgba(212, 0, 42, 0.35);
+}
+
+.avis-car-card .car-image-wrapper {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.avis-car-card .car-image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.avis-car-card:hover .car-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.avis-car-card .car-badge-year {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--mg-dark);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--mg-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.avis-car-card .car-badge-category {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--mg-primary-subtle);
+  color: var(--mg-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--mg-radius-sm);
+}
+
+.avis-car-card .car-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.avis-car-card .car-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--mg-text-main);
+  margin-bottom: 0.25rem;
+}
+
+.avis-car-card .car-subtitle {
+  font-size: 0.85rem;
+  color: var(--mg-text-muted);
+  margin-bottom: 1rem;
+}
+
+.avis-car-card .car-features {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--mg-border-subtle);
+  border-bottom: 1px solid var(--mg-border-subtle);
+  margin-bottom: 1rem;
+  font-size: 0.825rem;
+  color: var(--mg-text-muted);
+}
+
+.avis-car-card .car-features span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.avis-car-card .car-features i {
+  color: var(--mg-primary);
+}
+
+.avis-car-card .car-price-row {
+  margin-top: auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+}
+
+.avis-car-card .price-amount {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--mg-primary);
+}
+
+.avis-car-card .price-period {
+  font-size: 0.8rem;
+  color: var(--mg-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   7. FORMULARIOS, INPUTS Y CONTROLES
+   -------------------------------------------------------------------------- */
+.form-control,
+.form-select {
+  border: 1px solid var(--mg-border);
+  border-radius: var(--mg-radius-sm);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.95rem;
+  transition: var(--mg-transition);
+  background-color: var(--mg-surface);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--mg-primary);
+  box-shadow: 0 0 0 3px rgba(212, 0, 42, 0.15);
+  outline: none;
+}
+
+.input-group-text {
+  background-color: var(--mg-surface-secondary);
+  border: 1px solid var(--mg-border);
+  color: var(--mg-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. PANELES DE ADMINISTRACIÓN Y TABLAS
+   -------------------------------------------------------------------------- */
+.avis-card {
+  background: var(--mg-surface);
+  border-radius: var(--mg-radius-md);
+  border: 1px solid var(--mg-border);
+  box-shadow: var(--mg-shadow-sm);
+  overflow: hidden;
+}
+
+.avis-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--mg-border);
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avis-card-header h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.avis-table {
+  margin-bottom: 0;
+}
+
+.avis-table thead th {
+  background-color: var(--mg-surface-secondary);
+  color: var(--mg-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--mg-border);
+  padding: 0.85rem 1rem;
+}
+
+.avis-table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--mg-border-subtle);
+  font-size: 0.9rem;
+}
+
+.avis-table tbody tr:hover {
+  background-color: rgba(212, 0, 42, 0.02);
+}
+
+/* --------------------------------------------------------------------------
+   9. TARJETA DE AUTENTICACIÓN (LOGIN / REGISTRO)
+   -------------------------------------------------------------------------- */
+.auth-wrapper {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--mg-surface);
+  border-radius: var(--mg-radius-lg);
+  border: 1px solid var(--mg-border);
+  box-shadow: var(--mg-shadow-lg);
+  overflow: hidden;
+}
+
+.auth-card-header {
+  background: var(--mg-dark);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: #fff;
+  border-bottom: 3px solid var(--mg-primary);
+}
+
+.auth-card-body {
+  padding: 2rem 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. PIE DE PÁGINA (FOOTER ESTILO AVIS)
+   -------------------------------------------------------------------------- */
+.avis-footer {
+  background-color: var(--mg-dark);
+  color: #94a3b8;
+  padding-top: 3.5rem;
+  padding-bottom: 2rem;
+  border-top: 3px solid var(--mg-primary);
+  margin-top: 5rem;
+}
+
+.avis-footer h6 {
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.25rem;
+}
+
+.avis-footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.avis-footer ul li {
+  margin-bottom: 0.65rem;
+}
+
+.avis-footer ul li a {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.avis-footer ul li a:hover {
+  color: #ffffff;
+  padding-left: 4px;
+}
+
+.avis-footer-bottom {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. PAGINACIÓN Y ALERTAS
+   -------------------------------------------------------------------------- */
+.page-link {
+  color: var(--mg-text-main);
+  border: 1px solid var(--mg-border);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--mg-radius-sm);
+  margin: 0 2px;
+}
+
+.page-item.active .page-link {
+  background-color: var(--mg-primary);
+  border-color: var(--mg-primary);
+  color: #ffffff;
+}
+
+.page-link:hover {
+  background-color: var(--mg-surface-secondary);
+  color: var(--mg-primary);
+}
+
+.alert-avis {
+  border-left: 4px solid var(--mg-primary);
+  background-color: #fff;
+  box-shadow: var(--mg-shadow-sm);
+  border-radius: var(--mg-radius-sm);
+}
+
+/* Centrado utilitario */
+#centrado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

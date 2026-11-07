@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ auto.marca }} {{ auto.modelo }} | Detalle de Vehículo{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Migas de pan (Breadcrumbs) -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'autos:lista' %}">Flota</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'autos:lista' %}?marca={{ auto.marca }}">{{ auto.marca }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ auto.modelo }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Imagen y Galería Principal -->
+        <div class="col-lg-8">
+            <div class="avis-card p-3 mb-4">
+                <div class="text-center py-4 bg-light rounded-3">
+                    {% if auto.imagen %}
+                        <img src="{{ auto.imagen.url }}" alt="{{ auto.marca }} {{ auto.modelo }}" class="img-fluid rounded" style="max-height: 400px; object-fit: contain;">
+                    {% else %}
+                        <img src="{% static 'imgs/autos-banner.jpg' %}" alt="Moon-Go Car" class="img-fluid rounded" style="max-height: 350px; object-fit: cover;">
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Especificaciones del Auto -->
+            <div class="avis-card p-4">
+                <h4 class="fw-bold mb-3">Especificaciones y Equipamiento</h4>
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center p-3 bg-light rounded-2">
+                            <i class="bi bi-calendar-event fs-3 text-danger me-3"></i>
+                            <div>
+                                <small class="text-muted d-block">Año de fabricación</small>
+                                <strong>{{ auto.anho }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center p-3 bg-light rounded-2">
+                            <i class="bi bi-palette fs-3 text-danger me-3"></i>
+                            <div>
+                                <small class="text-muted d-block">Color exterior</small>
+                                <strong>{{ auto.color|title }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center p-3 bg-light rounded-2">
+                            <i class="bi bi-card-heading fs-3 text-danger me-3"></i>
+                            <div>
+                                <small class="text-muted d-block">Patente de registro</small>
+                                <strong>{{ auto.patente }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center p-3 bg-light rounded-2">
+                            <i class="bi bi-shield-check fs-3 text-danger me-3"></i>
+                            <div>
+                                <small class="text-muted d-block">Cobertura y Seguro</small>
+                                <strong>Protección CDW Básica Incluida</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Tarifa y Reserva -->
+        <div class="col-lg-4">
+            <div class="avis-card p-4 sticky-top" style="top: 90px;">
+                <span class="badge bg-danger mb-2">Disponible para arriendo</span>
+                <h3 class="fw-bold mb-1">{{ auto.marca }} {{ auto.modelo }}</h3>
+                <p class="text-muted small mb-3">Categoría Sedán / Hatchback Confort</p>
+
+                <div class="p-3 bg-light rounded-2 mb-4">
+                    <span class="text-muted small d-block">Precio diario</span>
+                    <span class="display-6 fw-bold text-danger">${{ auto.precio_dia|floatformat:0 }}</span>
+                    <span class="text-muted"> CLP / día</span>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-2">Incluye en tu tarifa:</h6>
+                    <ul class="list-unstyled small text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Kilometraje ilimitado</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Asistencia en ruta 24/7</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Cancelación sin costo hasta 48h antes</li>
+                    </ul>
+                </div>
+
+                <a href="#" class="btn btn-avis w-100 py-3 mb-2 fw-bold text-uppercase">
+                    <i class="bi bi-calendar-check me-2"></i> Solicitar Reserva
+                </a>
+                <a href="{% url 'autos:lista' %}" class="btn btn-outline-secondary w-100 py-2">
+                    <i class="bi bi-arrow-left me-1"></i> Volver a la flota
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehículos Similares -->
+    {% if similares %}
+    <div class="mt-5">
+        <h4 class="fw-bold mb-4">Otros modelos de {{ auto.marca }}</h4>
+        <div class="row g-4">
+            {% for sim in similares %}
+            <div class="col-md-4">
+                <div class="avis-car-card">
+                    <div class="car-image-wrapper" style="height: 160px;">
+                        {% if sim.imagen %}
+                            <img src="{{ sim.imagen.url }}" alt="{{ sim.marca }} {{ sim.modelo }}">
+                        {% else %}
+                            <img src="{% static 'imgs/autos-banner.jpg' %}" alt="Moon-Go Car" style="opacity: 0.85;">
+                        {% endif %}
+                    </div>
+                    <div class="car-body">
+                        <h5 class="car-title">{{ sim.marca }} {{ sim.modelo }}</h5>
+                        <p class="car-subtitle">{{ sim.anho }} &bull; {{ sim.color|title }}</p>
+                        <div class="car-price-row">
+                            <span class="price-amount">${{ sim.precio_dia|floatformat:0 }} <small class="fs-6 text-muted">/día</small></span>
+                            <a href="{% url 'autos:detalle' sim.slug %}" class="btn btn-sm btn-avis">Ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
