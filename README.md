@@ -42,10 +42,6 @@ Los siguientes son los prompts exactos enviados al asistente Antigravity durante
 > *(No necesito que hagas el trabajo, solo que me orientes en qué hacer, en qué archivos)*
 > Quiero poder hacer que los clientes puedan registrar arriendos (reservas) de autos y que puedan ver únicamente las que ellos hicieron
 
-> **Prompt 2:**
-> *[citando la orientación anterior]* me ayudas a hacer ese botón (No lo hagas tu)
-> — En referencia a: *"(Opcional) Botón en `templates/autos/auto_detalle.html` — Agregar un botón 'Arrendar este auto' que lleve a `reservas:crear` con el slug del auto."*
-
 > **Prompt 3:**
 > Podrías citarte y además adjuntar el prompt que usé en esta conversación en el readme?
 
