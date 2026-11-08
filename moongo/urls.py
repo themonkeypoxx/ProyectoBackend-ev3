@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('registrar/', include('apps.usuarios.urls')),
     path('', lambda request: redirect('autos:lista')),
+    path('reservas/', include('apps.reservas.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
