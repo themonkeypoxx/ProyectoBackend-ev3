@@ -1,12 +1,16 @@
 # Moon-Go | Sistema de Arriendo de Vehículos
 
-# Integrantes del Proyecto
-* **Ismael Figueroa**
-* **Francisco Miranda**
+Integrantes: Ismael Figueroa (22.277.640-6) - Francisco Miranda (22.260.014-7)
+
+Entidad de Contexto: Categoría de vehículo
+
+Entidad principal: Vehículo
+
+Propósito de la sesión: días de uso, selección de vehículo.
 
 # Tecnologías Utilizadas
 #   Backend: Python & Django Framework.
-#  Base de Datos: SQLite (desarrollo local) con ORM de Django.
+#   Base de Datos: SQLite (desarrollo local) con ORM de Django.
 #   Frontend: HTML5, CSS3 personalizado con variables globales, Bootstrap 5.3 y Bootstrap Icons.
 
 
