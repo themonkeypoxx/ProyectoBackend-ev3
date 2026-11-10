@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis reservas | Moon-Go{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Mis reservas</h2>
+    <a href="{% url 'autos:lista' %}" class="btn btn-outline-secondary btn-sm">
+      <i class="bi bi-arrow-left"></i> Volver a la flota
+    </a>
+  </div>
+
+  {% if reservas %}
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Vehículo</th>
+            <th>Desde</th>
+            <th>Hasta</th>
+            <th>Precio por día</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for reserva in reservas %}
+            <tr>
+              <td>
+                <a href="{% url 'autos:detalle' reserva.auto.slug %}">
+                  {{ reserva.auto.marca }} {{ reserva.auto.modelo }} ({{ reserva.auto.anho }})
+                </a>
+              </td>
+              <td>{{ reserva.fecha_inicio|date:"d/m/Y H:i" }}</td>
+              <td>{{ reserva.fecha_fin|date:"d/m/Y H:i" }}</td>
+              <td>${{ reserva.auto.precio_dia|floatformat:0 }} CLP</td>
+              <td>
+                <span class="badge {% if reserva.estado == 'confirmada' %}bg-success{% elif reserva.estado == 'cancelada' %}bg-danger{% else %}bg-warning text-dark{% endif %}">
+                  {{ reserva.get_estado_display|default:reserva.estado|capfirst }}
+                </span>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info">
+      Aún no tienes reservas.
+      <a href="{% url 'autos:lista' %}" class="alert-link">Revisa la flota disponible</a>.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
