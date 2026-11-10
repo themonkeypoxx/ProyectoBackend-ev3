@@ -40,14 +40,14 @@
                     </li>
 
                     {% if user.is_authenticated and not user.is_staff and not user.is_superuser %}
+                    {% if reservas_activas %}
                     <li class="nav-item">
-                        <a href="{% url 'reservas:mis_reservas' %}" class="nav-link text-white">
-                            <i class="bi bi-calendar-check me-1"></i> Mis reservas
-                            {% if reservas_activas %}
-                                <span class="badge bg-danger ms-1">{{ reservas_activas }}</span>
-                            {% endif %}
-                        </a>
+                        <span class="nav-link text-warning">
+                            <i class="bi bi-clock-history me-1"></i> Reservas activas: <strong>{{ reservas_activas
+                                }}</strong>
+                        </span>
                     </li>
+                    {% endif %}
                     {% endif %}
 
                     {% if user.is_staff or user.is_superuser %}
