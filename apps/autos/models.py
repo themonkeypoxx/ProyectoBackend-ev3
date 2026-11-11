@@ -8,7 +8,27 @@ def anho_actual():
     return timezone.now().year
 
 
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=40, unique=True)
+    descripcion = models.CharField(max_length=200, blank=True)
+
+    class Meta():
+        verbose_name_plural = "Categorías"
+        ordering = ['nombre']
+
+    def __str__(self):
+        return self.nombre
+
+
 class Auto(models.Model):
+    categoria = models.ForeignKey(
+        Categoria,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='autos',
+        verbose_name="Categoría",
+    )
     marca = models.CharField(max_length=20)
     modelo = models.CharField(max_length=20)
     patente = models.CharField(max_length=20, unique=True)
